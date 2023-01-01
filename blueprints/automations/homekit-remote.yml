@@ -86,6 +86,7 @@ blueprint:
       back: '{{ key_value_back }}'
 
   mode: queued
+  max: 10
   max_exceeded: warning
   trigger:
     # trigger for zigbee2mqtt
@@ -93,6 +94,8 @@ blueprint:
       event_type: homekit_tv_remote_key_pressed
       event_data:
         entity_id: !input media_player_entity
+
+  condition: []
 
   action:
     - variables:
