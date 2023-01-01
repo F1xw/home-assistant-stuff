@@ -3,7 +3,7 @@ blueprint:
   name: Controller - HomeKit Remote
   description: |
     # Map the HomeKit TV Remote to your actual TV Remote
-  source_url: https://github.com/F1xw/home-assistant-stuff/blob/main/blueprints/automations/homekit-remote.yaml
+  source_url: https://github.com/F1xw/home-assistant-stuff/blob/main/blueprints/automations/homekit-remote.yml
   domain: automation
   input:
     media_player_entity:
