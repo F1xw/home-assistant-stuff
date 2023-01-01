@@ -1,6 +1,6 @@
 blueprint:
-  name: Controller - HomeKit Remote
-  description: Map the HomeKit TV Remote to your actual TV Remote
+  name: HomeKit TV Remote
+  description: Map the HomeKit TV Remote to your TV 
   domain: automation
   input:
     media_player_entity:
