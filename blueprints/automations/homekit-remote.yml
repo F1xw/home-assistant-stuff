@@ -23,47 +23,46 @@ blueprint:
     key_value_up:
       name: Key Name Up
       description: The name of the key used to send the 'UP' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
     key_value_up:
       name: Key Name Down
       description: The name of the key used to send the 'DOWN' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
     key_value_up:
       name: Key Name Left
       description: The name of the key used to send the 'LEFT' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
     key_value_up:
       name: Key Name Right
       description: The name of the key used to send the 'RIGHT' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
     key_value_up:
       name: Key Name Select
       description: The name of the key used to send the 'SELECT' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
     key_value_up:
       name: Key Name Information
       description: The name of the key used to send the 'INFORMATION' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
     key_value_up:
       name: Key Name BACK
       description: The name of the key used to send the 'BACK' command to your remote.
-      default: []
+      default: ''
       selector:
         text:
-    
-  # Automation schema
+  
   variables:
     media_player_entity: !input media_player_entity
     remote_entity: !input remote_entity
@@ -74,7 +73,6 @@ blueprint:
     key_value_select: !input key_value_select
     key_value_information: !input key_value_information
     key_value_back: !input key_value_back
-    # mapping between actions and integrations
 
     actions:
       arrow_up: '{{ key_value_up }}'
@@ -85,18 +83,14 @@ blueprint:
       information: '{{ key_value_information }}'
       back: '{{ key_value_back }}'
 
-  mode: queued
-  max: 10
+  mode: single
   max_exceeded: warning
   trigger:
-    # trigger for zigbee2mqtt
     - platform: event
       event_type: homekit_tv_remote_key_pressed
       event_data:
         entity_id: !input media_player_entity
-
   condition: []
-
   action:
     - variables:
         trigger_action: >-
