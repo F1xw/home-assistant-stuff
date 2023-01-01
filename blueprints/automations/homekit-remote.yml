@@ -57,7 +57,7 @@ blueprint:
       selector:
         text:
     key_value_up:
-      name: Key Name BACK
+      name: Key Name Back
       description: The name of the key used to send the 'BACK' command to your remote.
       default: ''
       selector:
@@ -83,20 +83,22 @@ blueprint:
       information: '{{ key_value_information }}'
       back: '{{ key_value_back }}'
 
-  mode: single
-  max_exceeded: warning
-  trigger:
-    - platform: event
-      event_type: homekit_tv_remote_key_pressed
-      event_data:
-        entity_id: !input media_player_entity
-  condition: []
-  action:
-    - variables:
-        trigger_action: >-
-          {{ trigger.event.data.key_name }}
-    - service: remote.send_command
-      data:
-        command: '{{ actions[trigger_action] }}'
-      target:
-        entity_id: remote.sony_kd_55x8507c
+mode: queued
+max: 10
+max_exceeded: warning
+
+trigger:
+  - platform: event
+    event_type: homekit_tv_remote_key_pressed
+    event_data:
+      entity_id: !input media_player_entity
+
+action:
+  - variables:
+      trigger_action: >-
+        {{ trigger.event.data.key_name }}
+  - service: remote.send_command
+    data:
+      command: '{{ actions[trigger_action] }}'
+    target:
+      entity_id: remote.sony_kd_55x8507c
