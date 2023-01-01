@@ -85,8 +85,8 @@ blueprint:
       information: '{{ key_value_information }}'
       back: '{{ key_value_back }}'
 
-  mode: queue
-  max_exceeded: silent
+  mode: queued
+  max_exceeded: warning
   trigger:
     # trigger for zigbee2mqtt
     - platform: event
