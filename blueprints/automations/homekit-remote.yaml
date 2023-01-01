@@ -1,4 +1,3 @@
-# Blueprint metadata
 blueprint:
   name: Controller - HomeKit Remote
   description: Map the HomeKit TV Remote to your actual TV Remote
@@ -10,74 +9,10 @@ blueprint:
       selector:
         entity:
           domain: media_player
-    remote_entity:
-      name: Remote Entity
-      description: Choose the entity that you want to send the key presses to.
-      selector:
-        entity:
-          domain: remote
-    key_value_up:
-      name: Key Name Up
-      description: The name of the key used to send the 'UP' command to your remote.
-      default: ''
-      selector:
-        text:
-    key_value_up:
-      name: Key Name Down
-      description: The name of the key used to send the 'DOWN' command to your remote.
-      default: ''
-      selector:
-        text:
-    key_value_up:
-      name: Key Name Left
-      description: The name of the key used to send the 'LEFT' command to your remote.
-      default: ''
-      selector:
-        text:
-    key_value_up:
-      name: Key Name Right
-      description: The name of the key used to send the 'RIGHT' command to your remote.
-      default: ''
-      selector:
-        text:
-    key_value_up:
-      name: Key Name Select
-      description: The name of the key used to send the 'SELECT' command to your remote.
-      default: ''
-      selector:
-        text:
-    key_value_up:
-      name: Key Name Information
-      description: The name of the key used to send the 'INFORMATION' command to your remote.
-      default: ''
-      selector:
-        text:
-    key_value_up:
-      name: Key Name Back
-      description: The name of the key used to send the 'BACK' command to your remote.
-      default: ''
-      selector:
-        text:
-  
+          
 variables:
   media_player_entity: !input media_player_entity
-  remote_entity: !input remote_entity
-  key_value_up: !input key_value_up
-  key_value_down: !input key_value_down
-  key_value_left: !input key_value_left
-  key_value_right: !input key_value_right
-  key_value_select: !input key_value_select
-  key_value_information: !input key_value_information
-  key_value_back: !input key_value_back
 
-  actions:
-    arrow_up: '{{ key_value_up }}'
-    arrow_down: '{{ key_value_down }}'
-    arrow_left: '{{ key_value_left }}'
-    arrow_right: '{{ key_value_right }}'
-    select: '{{ key_value_select }}'
-    information: '{{ key_value_information }}'
-    back: '{{ key_value_back }}'
 
 mode: queued
 max: 10
@@ -93,8 +28,4 @@ action:
   - variables:
       trigger_action: >-
         {{ trigger.event.data.key_name }}
-  - service: remote.send_command
-    data:
-      command: '{{ actions[trigger_action] }}'
-    target:
-      entity_id: '{{ remote_entity }}'
+
