@@ -1,22 +1,18 @@
 # Blueprint metadata
 blueprint:
   name: Controller - HomeKit Remote
-  description: |
-    # Map the HomeKit TV Remote to your actual TV Remote
-  source_url: https://github.com/F1xw/home-assistant-stuff/blob/main/blueprints/automations/homekit-remote.yml
+  description: Map the HomeKit TV Remote to your actual TV Remote
   domain: automation
   input:
     media_player_entity:
       name: Media Player
       description: The media player / TV that HomeKit is controling.
-      default: ''
       selector:
         entity:
           domain: media_player
     remote_entity:
       name: Remote Entity
       description: Choose the entity that you want to send the key presses to.
-      default: ''
       selector:
         entity:
           domain: remote
@@ -73,7 +69,7 @@ variables:
   key_value_select: !input key_value_select
   key_value_information: !input key_value_information
   key_value_back: !input key_value_back
-  
+
   actions:
     arrow_up: '{{ key_value_up }}'
     arrow_down: '{{ key_value_down }}'
@@ -101,4 +97,4 @@ action:
     data:
       command: '{{ actions[trigger_action] }}'
     target:
-      entity_id: remote.sony_kd_55x8507c
+      entity_id: '{{ remote_entity }}'
