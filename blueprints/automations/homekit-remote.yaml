@@ -9,10 +9,20 @@ blueprint:
       selector:
         entity:
           domain: media_player
-          
+    
+  
 variables:
   media_player_entity: !input media_player_entity
 
+
+  actions:
+    arrow_up: down #'{{ key_value_up }}'
+    arrow_down: down #'{{ key_value_down }}'
+    arrow_left: down #'{{ key_value_left }}'
+    arrow_right: down #'{{ key_value_right }}'
+    select: down #'{{ key_value_select }}'
+    information: down #'{{ key_value_information }}'
+    back: #'{{ key_value_back }}'
 
 mode: queued
 max: 10
@@ -28,4 +38,8 @@ action:
   - variables:
       trigger_action: >-
         {{ trigger.event.data.key_name }}
-
+  - service: remote.send_command
+    data:
+      command: '{{ actions[trigger_action] }}'
+    target:
+      entity_id: '{{ media_player_entity }}'
