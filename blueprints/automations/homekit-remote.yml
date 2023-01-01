@@ -63,43 +63,43 @@ blueprint:
       selector:
         text:
     
-# Automation schema
-variables:
-  media_player_entity: !input media_player_entity
-  remote_entity: !input remote_entity
-  key_value_up: !input key_value_up
-  key_value_down: !input key_value_down
-  key_value_left: !input key_value_left
-  key_value_right: !input key_value_right
-  key_value_select: !input key_value_select
-  key_value_information: !input key_value_information
-  key_value_back: !input key_value_back
-  # mapping between actions and integrations
+  # Automation schema
+  variables:
+    media_player_entity: !input media_player_entity
+    remote_entity: !input remote_entity
+    key_value_up: !input key_value_up
+    key_value_down: !input key_value_down
+    key_value_left: !input key_value_left
+    key_value_right: !input key_value_right
+    key_value_select: !input key_value_select
+    key_value_information: !input key_value_information
+    key_value_back: !input key_value_back
+    # mapping between actions and integrations
 
-  actions:
-    arrow_up: '{{ key_value_up }}'
-    arrow_down: '{{ key_value_down }}'
-    arrow_left: '{{ key_value_left }}'
-    arrow_right: '{{ key_value_right }}'
-    select: '{{ key_value_select }}'
-    information: '{{ key_value_information }}'
-    back: '{{ key_value_back }}'
+    actions:
+      arrow_up: '{{ key_value_up }}'
+      arrow_down: '{{ key_value_down }}'
+      arrow_left: '{{ key_value_left }}'
+      arrow_right: '{{ key_value_right }}'
+      select: '{{ key_value_select }}'
+      information: '{{ key_value_information }}'
+      back: '{{ key_value_back }}'
 
-mode: queue
-max_exceeded: silent
-trigger:
-  # trigger for zigbee2mqtt
-  - platform: event
-    event_type: homekit_tv_remote_key_pressed
-    event_data:
-      entity_id: !input media_player_entity
+  mode: queue
+  max_exceeded: silent
+  trigger:
+    # trigger for zigbee2mqtt
+    - platform: event
+      event_type: homekit_tv_remote_key_pressed
+      event_data:
+        entity_id: !input media_player_entity
 
-action:
-  - variables:
-      trigger_action: >-
-        {{ trigger.event.data.key_name }}
-  - service: remote.send_command
-    data:
-      command: '{{ actions[trigger_action] }}'
-    target:
-      entity_id: remote.sony_kd_55x8507c
+  action:
+    - variables:
+        trigger_action: >-
+          {{ trigger.event.data.key_name }}
+    - service: remote.send_command
+      data:
+        command: '{{ actions[trigger_action] }}'
+      target:
+        entity_id: remote.sony_kd_55x8507c
